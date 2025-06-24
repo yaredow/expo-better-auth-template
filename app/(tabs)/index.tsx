@@ -5,8 +5,11 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { authClient } from "@/lib/auth-client";
 
 export default function HomeScreen() {
+  const { data: session } = authClient.useSession();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -25,7 +28,9 @@ export default function HomeScreen() {
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
+          <ThemedText type="defaultSemiBold">
+            Welcome, {session?.user.name}
+          </ThemedText>{" "}
           to see changes. Press{" "}
           <ThemedText type="defaultSemiBold">
             {Platform.select({
